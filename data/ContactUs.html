@@ -1,213 +1,155 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>Contact Us</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!--update path-->
+    <link href="../css/master.css" rel="Stylesheet" type="text/css" />
+    <link href="../css/contactus.css" rel="Stylesheet" type="text/css" />
+    <script src="../js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
-    <link href="../css/ContactUs.css" rel="stylesheet" type="text/css" />
-
-    <script>
-        function updateRelocationForm() {
-            if ($("#RelocationForm").is(':visible')) {
-                $("#LookingToMove").text("Planning to move to the area? Click here!");
-
-                $("#ContactForm input[type=hidden]").val("");
-            }
-            else {
-                $("#LookingToMove").text("Changed your mind? Click here!");
-
-                $("#ContactForm input[type=hidden]").val("Yes");
-            }
-            $("#RelocationForm").slideToggle();
-            $("#SubmitForm").fadeToggle();
-
-        }
-
-
-
-        function openDirections() {
-            $('#ContactOverlay').stop().show().css({ opacity: 0 }).animate({ opacity: 1 });
-        }
-        function closeDirections() {
-            $('#ContactOverlay').stop().hide();
-        }
-        function getDirections() {
-            var streetaddress = encodeURIComponent($('#dirAddress').val());
-            var city = encodeURIComponent($('#dirCity').val());
-            var state = encodeURIComponent($('#dirState').val());
-            var zip = encodeURIComponent($('#dirZip').val());
-            var url = "http://maps.google.com/maps?saddr=" + streetaddress + "," + city + "," + state + "&daddr=Porter+Properties,427+North+Dean+Road+Suite+200,+Auburn,+AL+36830&hl=en";
-            window.open(url, 'Directions');
-            closeDirections();
-        }
-
-
-
-
-        function initializeMap() {
-            var location = new google.maps.LatLng(32.61350783410655, -85.46389448518067);
-            var myOptions = { zoom: 14, center: location, mapTypeId: google.maps.MapTypeId.ROADMAP };
-            var map = new google.maps.Map(document.getElementById('Map'), myOptions);
-            var marker = new google.maps.Marker({ position: location, map: map, draggable: false, icon: '/res/images/map/weichertIcon.png' });
-        }
-        $(document).ready(function () {
-            initializeMap();
-            $('#ContactOverlay').stop().hide();
-            $("#LookingToMove").click(function () { updateRelocationForm() });
-            $('#SentMSG').stop().hide();
-            if ($("#ContactForm input:hidden").val().length > 0) {
-                updateRelocationForm();
-            }
-        });
-    </script>
+    <script src="../js/contact-us.js"></script>
 </head>
 <body>
     <div id="ContentWrap">
         <div id="Content">
             <h1>Contact Us</h1>
             <div id="ContactForm">
-                <div id="ContactForm-Entry">
-                    <!--<asp:Literal ID="ltErrors" runat="server"></asp:Literal>-->
-                    <input type="hidden" id="MovingInfoRequest" value="" />
-                    <div id="MainForm">
-                        <div id="FName">
-                            <label for="tbFirstName" id="lblFirstName">First Name:</label>
-                            <input type="text" id="tbFirstName" placeholder="First Name" />
+                <form name="contact_form" id="contact_form">
+                    <div id="ContactForm-Entry">
+                        <input type="hidden" id="MovingInfoRequest" value="" />
+                        <div id="MainForm">
+                            <div id="FName">
+                                <label for="tbFirstName" id="lblFirstName">First Name:</label>
+                                <input type="text" id="tbFirstName" placeholder="First Name" />
+                            </div>
+                            <div id="LName">
+                                <label for="tbLastName" id="lblLastName">Last Name:</label>
+                                <input type="text" id="tbLastName" placeholder="Last Name" />
+                            </div>
+                            <div id="Email">
+                                <label for="tbEmail" id="lblEmail">Email Address:</label>
+                                <input type="email" id="tbEmail" placeholder="Email Address" />
+                            </div>
+                            <div id="Phone">
+                                <label for="tbPhone" id="lblPhone"> Phone Number:</label>
+                                <input type="tel" id="tbPhone" placeholder="Phone Number" />
+                            </div>
+                            <div id="Ext">
+                                <label for="tbExt" id="lblExt">Extension:</label>
+                                <input type="text" id="tbExt" placeholder="Extension" />
+                            </div>
+                            <div id="Street">
+                                <label for="tbStreet" id="lblStreet">Street:</label>
+                                <input type="text" id="tbStreet" placeholder="Street Address" />
+                            </div>
+                            <div id="City">
+                                <label for="tbCity" id="lblCity">City: </label>
+                                <input type="text" id="tbCity" placeholder="City" />
+                            </div>
+                            <div id="State">
+                                <label for="tbState" id="lblState">State: </label>
+                                <input type="text" id="tbState" placeholder="State" />
+                            </div>
+                            <div id="Zip">
+                                <label for="tbZip" id="lblZip">Zip Code:</label>
+                                <input type="text" id="tbZip" placeholder="Zip" />
+                            </div>
+                            <div id="Comments">
+                                <label for="tbComments" id="lblComments">Questions or Comments:</label>
+                                <textarea id="tbComments" placeholder="Questions or Comments"></textarea>
+                            </div>
                         </div>
-                        <div id="LName">
-                            <label for="tbLastName" id="lblLastName">Last Name:</label>
-                            <input type="text" id="tbLastName" placeholder="Last Name" />
+                        <div id="Buttons">
+                            <div id="SubmitForm">
+                                <a href="" id="btnContactSubmit" class="btn" onclick="submit(); return false;">Send Request</a>
+                            </div>
+                            <div id="LookingToMove">
+                                Planning to move to the area? Click here!
+                            </div>
                         </div>
-                        <div id="Email">
-                            <label for="tbEmail" id="lblEmail">Email Address:</label>
-                            <input type="email" id="tbEmail" placeholder="Email Address" />
-                        </div>
-                        <div id="Phone">
-                            <label for="tbPhone" id="lblPhone"> Phone Number:</label>
-                            <input type="tel" id="tbPhone" placeholder="Phone Number" />
-                        </div>
-                        <div id="Ext">
-                            <label for="tbExt" id="lblExt">Extension:</label>
-                            <input type="text" id="tbExt" placeholder="Ext." />
-                        </div>
-                        <div id="Street">
-                            <label for="tbStreet" id="lblStreet">Street:</label>
-                            <input type="text" id="tbStreet" placeholder="Street Address" />
-                        </div>
-                        <div id="City">
-                            <label for="tbCity" ID="lblCity">City: </label>
-                            <input type="text" id="tbCity" placeholder="City" />
-                        </div>
-                        <div id="State">
-                            <label for="tbState" ID="lblState">State: </label>
-                            <input type="text" id="tbState" placeholder="State" />
-                        </div>
-                        <div id="Zip">
-                            <label for="tbZip" ID="lblZip">Zip Code:</label>
-                            <input type="text" id="tbZip" placeholder="Zip" />
-                        </div>
-                        <div id="Comments">
-                            <label for="tbComments" ID="lblComments">Questions or Comments:</label>
-                            <textarea id="tbComments" placeholder="Questions or Comments" ></textarea>
+                        <div id="RelocationForm">
+                            <div>
+                                <label for="agent1" id="lblAgent" class="inline-label">Are you currently working with an agent?</label>
+                                <label for="agent1"><input type="radio" id="agent1" name="agent" value="yes" />Yes</label>
+                                <label for="agent2"><input type="radio" id="agent2" name="agent" value="no" />No</label>
+                            </div>
+                            <div>
+                                <label for="cbInterests" id="lblInterests" class="full-label">What kind of information are you interested in?</label>
+                                <div class="check-list">
+                                    <label for="interests1"><input type="checkbox" id="interests1" name="interests" value="Mortgage and Lending">Mortgage and Lending</label>
+                                    <label for="interests2"><input type="checkbox" id="interests2" name="interests" value="Moving Companies">Moving Companies</label>
+                                    <label for="interests3"><input type="checkbox" id="interests3" name="interests" value="Employment Information">Employment Information</label>
+                                    <label for="interests4"><input type="checkbox" id="interests4" name="interests" value="School Information">School Information</label>
+                                    <label for="interests5"><input type="checkbox" id="interests5" name="interests" value="Community Information">Community Information</label>
+                                    <label for="interests6"><input type="checkbox" id="interests6" name="interests" value="Other">Other</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="moving1" id="lblMoving" class="inline-label">Are you planning on moving to this area?</label>
+                                <label for="moving1"><input type="radio" id="moving1" name="moving" value="yes" />Yes</label>
+                                <label for="moving2"><input type="radio" id="moving2" name="moving" value="no" />No</label>
+                            </div>
+                            <div id="RelocationNeighborhoods">
+                                <label for="tbInterestedNeighborhoods" class="full-label">What cities or neighborhoods are you interested in?</label>
+                                <textarea id="tbInterestedNeighborhoods"></textarea>
+                            </div>
+                            <div>
+                                <label for="tbMovingDate" id="lblMovingDate" class="full-label">When are you moving?</label>
+                                <input type="date" id="tbMovingDate" />
+                            </div>
+                            <div>
+                                <label for="buyrent1" id="lblBuyRent" class="inline-label">Are you looking to buy or rent?</label>
+                                <label for="buyrent1"><input type="radio" id="buyrent1" name="buyrent" value="buy" />Buy</label>
+                                <label for="buyrent2"><input type="radio" id="buyrent2" name="buyrent" value="rent" />Rent</label>
+                            </div>
+                            <div>
+                                <label for="homebuyer1" id="lblFirstTime" class="inline-label">Are you a first-time homebuyer?</label>
+                                <label for="homebuyer1"><input type="radio" id="homebuyer1" name="homebuyer" value="yes" />Yes</label>
+                                <label for="homebuyer2"><input type="radio" id="homebuyer2" name="homebuyer" value="no" />No</label>
+                            </div>
+                            <div>
+                                <label for="tbNumberPeople" id="lblNumberPeople" class="inline-label left">How many people live in your home?</label>
+                                <input type="number" id="tbNumberPeople" class="inline-textbox" />
+                            </div>
+                            <div>
+                                <label for="tbBedrooms" id="lblSizeHome" class="full-label">What size home are you looking for?</label>
+                                <div class="spaced">
+                                    <input type="number" id="tbBedrooms" class="inline-textbox" />
+                                    <label for="tbBedrooms" id="lblBedrooms" class="inline-label right">Minimum Bedrooms</label>
+                                </div>
+                                <div class="spaced">
+                                    <input type="number" id="tbBathrooms" class="inline-textbox" />
+                                    <label for="tbBathrooms" id="lblBathrooms" class="inline-label right">Minimum Bathrooms</label>
+                                </div>
+                                <div class="spaced">
+                                    <input type="number" id="tbHalfBaths" class="inline-textbox" />
+                                    <label for="tbHalfBaths" id="lblHalfBaths" class="inline-label right">Minimum half-baths</label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="tbMinimumPrice" id="lblPriceRange" class="full-label">What is your price range?</label>
+                                <div class="spaced">
+                                    <label for="tbMinimumPrice" id="lblMinimumPrice" class="inline-label left">Minimum Price</label>
+                                    <input type="text" id="tbMinimumPrice" class="inline-textbox large" />
+                                </div>
+                                <div class="spaced">
+                                    <label for="tbMaximumPrice" id="lblMaximumPrice" class="inline-label left">Maximum Price</label>
+                                    <input type="text" id="tbMaximumPrice" class="inline-textbox large" />
+                                </div>
+                            </div>
+                            <div id="RelocationButtons">
+                                <a href="" id="RelocationButton" class="btn" onclick="submit(); return false;">Send Request</a>
+                            </div>
                         </div>
                     </div>
-                    <div id="Buttons">
-                        <div id="SubmitForm">
-                            <a href="" id="btnContactSubmit" class="btn" onclick="Submit();">Send Request</a>
-                        </div>
-                        <div id="LookingToMove">
-                            Planning to move to the area? Click here!
-                        </div>
+                    <div id="ContactForm-Success">
+                        <p id="SentMSG">Your contact request was successfully sent!  Please give our agents time to respond to your comments.</p>
                     </div>
-                    <div id="RelocationForm">
-                        <div>
-                            <label for="ddlAgent" id="lblAgent" class="main-label">Are you currently working with an agent?</label>
-                            <select id="ddlAgent">
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="cbInterests" id="lblInterests" class="main-label">What kind of information are you interested in?</label>
-                            <input type="checkbox" id="interests1" name="interests" value="Mortgage and Lending"><label for="interests1">Mortgage and Lending</label>
-                            <input type="checkbox" id="interests2" name="interests" value="Moving Companies"><label for="interests2">Moving Companies</label>
-                            <input type="checkbox" id="interests3" name="interests" value="Employment Information"><label for="interests3">Employment Information</label>
-                            <input type="checkbox" id="interests4" name="interests" value="School Information"><label for="interests4">School Information</label>
-                            <input type="checkbox" id="interests5" name="interests" value="Community Information"><label for="interests5">Community Information</label>
-                            <input type="checkbox" id="interests6" name="interests" value="Other"><label for="interests6">Other</label>
-                        </div>
-                        <div>
-                            <label for="ddlMoving" id="lblMoving" class="main-label">Are you planning on moving to this area?</label>
-                            <select id="ddlMoving">
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="tbInterestedNeighborhoods" class="main-label">What cities or neighborhoods are you interested in?</label>
-                            <textarea id="tbInterestedNeighborhoods"></textarea>
-                        </div>
-                        <div>
-                            <label for="tbMovingDate" id="lblMovingDate">When are you moving?</label>
-                            <input type="date" id="tbMovingDate" />
-                        </div>
-                        <div>
-                            <label for="ddlBuyRent" id="lblBuyRent" class="main-label">Are you looking to buy or rent?</label>
-                            <select id="ddlBuyRent">
-                                <option value="Buy">Buy</option>
-                                <option value="Rent">Rent</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="ddlFirstTime" id="lblFirstTime" class="main-label">Are you a first-time homebuyer?</label>
-                            <select id="ddlFirstTime">
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                        <div class="split-input">
-                            <label for="tbNumberPeople" id="lblNumberPeople" class="main-label">How many people live in your home?</label>
-                            <input type="number" id="tbNumberPeople" />
-                        </div>
-                        <div>
-                            <label for="tbBedrooms" id="lblSizeHome">What size home are you looking for?</label>
-                            <div class="split-input spaced">
-                                <input type="number" id="tbBedrooms" />
-                                <label for="tbBedrooms" id="lblBedrooms" class="main-label right">Minimum Bedrooms</label>
-                            </div>
-                            <div class="split-input spaced">
-                                <input type="number" id="tbBathrooms" />
-                                <label for="tbBathrooms" id="lblBathrooms" class="main-label right" >Minimum Bathrooms</label>
-                            </div>
-                            <div class="split-input spaced">
-                                <input type="number" id="tbHalfBaths" />
-                                <label for="tbHalfBaths" id="lblHalfBaths" class="main-label right" >Minimum half-baths</label>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="tbMinimumPrice" id="lblPriceRange">What is your price range?</label>
-                            <div class="split-input spaced">
-                                <input id="tbMinimumPrice" />
-                                <label for="tbMinimumPrice" id="lblMinimumPrice" class="main-label right" >Minimum Price</label>
-                            </div>
-                            <div class="split-input spaced">
-                                <input id="tbMaximumPrice" />
-                                <label for="tbMaximumPrice" id="lblMaximumPrice" class="main-label right" >Maximum Price</label>
-                            </div>
-                        </div>
-                        <div id="RelocationButtons">
-                            <a href="" id="RelocationButton" class="btn" onclick="Submit()">Send Request</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="ContactForm-Success">
-                    <p id="SentMSG">Your contact request was successfully sent!  Please give our agents time to respond to your comments.</p>
-                </div>
+                </form>
             </div>
             <div id="ContactInformation">
                 <div id="MapWrap">
@@ -250,6 +192,46 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div id="Navigation">
+        <div>
+            <div class="search">
+                <a href="Map.html#search">
+                    <span></span>
+                    <i>Search</i>
+                </a>
+            </div>
+            <div class="nearby">
+                <a href="Map.html#nearby">
+                    <span></span>
+                    <i>Nearby Homes</i>
+                </a>
+            </div>
+            <div class="openhouses">
+                <a href="OpenHouses.html">
+                    <span></span>
+                    <i>Open Houses</i>
+                </a>
+            </div>
+            <div class="resources">
+                <a href="Resources.html">
+                    <span></span>
+                    <i>Resources</i>
+                </a>
+            </div>
+            <div class="careers">
+                <a href="Careers.html">
+                    <span></span>
+                    <i>Careers</i>
+                </a>
+            </div>
+            <div class="contact">
+                <a href="ContactUs.html">
+                    <span></span>
+                    <i>Contact Us</i>
+                </a>
             </div>
         </div>
     </div>
