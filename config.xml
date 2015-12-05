@@ -24,4 +24,6 @@
   <icon src = "res/icon/ios/apple-touch-icon-114x114.png" gap:platform = "ios" width = "114" height = "114" />
   <icon src = "res/icon/ios/apple-touch-icon-144x144.png" gap:platform = "ios" width = "144" height = "144" />
 
+  <feature name="http://api.phonegap.com/1.0/geolocation"/>
+
 </widget>
